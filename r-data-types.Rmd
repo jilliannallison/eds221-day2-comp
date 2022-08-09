@@ -7,9 +7,13 @@ output: html_document
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+rm(list=ls())
 ```
 
-## Vectors 
+## Vectors
 
 ```{r}
 # Create a vector
@@ -43,7 +47,7 @@ is.character(years) # asks if years is a character --- returns FALSE
 as.numeric(years) # coerces years to numeric (even though it already is)
 ```
 
-## Creating named elements 
+## Creating named elements
 
 ```{r}
 dog_food <- c(teddy = "purina", khora = "alpo", waffle = "fancy feast") 
@@ -52,4 +56,97 @@ dog_food <- c(teddy = "purina", khora = "alpo", waffle = "fancy feast")
 dog_food[2] # returns khora "alpo" 
 
 dog_food["khora"] # also returns khora "alpo". calls name associated with value. reproducible!
+
+```
+
+```{r}
+cars <- c("blue", "orange", "white")
+cars[1]
+
+i <- seq(1:2) # set index value as an object and use that to index
+cars[i]
+
+cars[3] <- "yellow" # overwrite existing values
+```
+
+## Matrices 
+
+```{r}
+fish_size <- matrix(c(12, 14, 18, 20), ncol = 2, nrow = 2, byrow = FALSE)
+class(fish_size) # matrix
+typeof(fish_size) # double 
+
+# Example matrix indexing 
+fish_size[1,1]
+fish_size[2,1] # row, column
+
+# What happens if we create a matrix with different types of data? 
+fish_type <- matrix(c(12, "trout", 18, 13L), ncol = 2, nrow = 2, byrow = FALSE)
+class(fish_type) # matrix
+typeof(fish_type) # character
+
+# What happens if I don't specify a row or column? 
+fish_size[2,] # gives second row 
+fish_size[,2] # gives whole second column 
+```
+
+## Lists 
+
+Reminder: A list combines vectors that can be of different length and type
+
+```{r}
+urchins <- list("blue", c(1, 2, 3), c("a cat", "a dog"), 5L) 
+class(urchins)
+typeof(urchins[[1]]) # gives type of each element using DOUBLE BRACKETS! 
+```
+
+## Make a named list 
+
+```{r}
+
+tacos <- list(topping = c("onion", "cilantro", "guacamole"),
+              filling = c("beans", "meat", "veggies"), 
+              price = c(6.75, 8.25, 9.5))
+tacos
+
+# Indexing list elements by name 
+tacos$filling[2] # searching filling list in tacos -- option 2
+```
+
+We can index in this text here!! and have values print!
+
+The second value of car colors is `r cars[2]` USED A BACKTICK TO GET IT IN RMARKDOWN
+
+## Data frames 
+
+A list of vectors where all the vectors have the same length
+
+```{r}
+# Creating vectors first, then calling them in data.frame() 
+topping <- c("onion", "cilantro", "guacamole")
+filling <- c("beans", "meat", "veggies")
+price <- c(6.75, 8.25, 9.5)
+
+df_ex_1 <- data.frame(topping, filling, price)
+
+# defining vectors within data.frame()
+df_ex_2 <- data.frame(topping = c("sour cream","salsa","cheese"), 
+                      filling = c("chicken","cheese","cabbage"),
+                      price = c(12.50, 13.75, 15.00))
+
+# Tribble method
+df_ex_3 <- tribble(
+  ~topping, ~filling, ~price, 
+  "avocado", "steak", 13.25, 
+  "radish", "fish", 10.40,
+  "salsa", "veggies", 9.75
+  ) 
+```
+
+## Indexing our data frames 
+
+```{r}
+df_ex_3$price[3]
+
+
 ```
