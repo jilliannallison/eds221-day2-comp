@@ -9,3 +9,47 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Vectors 
+
+```{r}
+# Create a vector
+dogs <- c("teddy","khora","waffle","banjo","tallie") 
+
+# Check the class
+class(dogs)
+```
+
+```{r}
+cats <- c("creamsicle wolf", 14.2, 3L) # going to be character, character is the most flexible type! 
+
+class(cats)
+```
+
+```{r}
+years <- c(20, 40, 16, 2)
+
+class(years) # returns numeric because we don't have 'L' after each number 
+
+typeof(years) # returns a double - digs deeper into data type 
+```
+
+```{r}
+# Want to do a conditional check 
+# is. <<< asks questions "is this THIS"
+# as. <<< gives a command "make this THIS" 
+
+is.numeric(years) # asks if years is numeric --- returns TRUE or FALSE... true in this case. 
+is.character(years) # asks if years is a character --- returns FALSE 
+as.numeric(years) # coerces years to numeric (even though it already is)
+```
+
+## Creating named elements 
+
+```{r}
+dog_food <- c(teddy = "purina", khora = "alpo", waffle = "fancy feast") 
+                    # gives name to each element, stores only values as vector though
+
+dog_food[2] # returns khora "alpo" 
+
+dog_food["khora"] # also returns khora "alpo". calls name associated with value. reproducible!
+```
